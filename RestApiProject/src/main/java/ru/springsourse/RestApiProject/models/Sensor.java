@@ -1,5 +1,6 @@
 package ru.springsourse.RestApiProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -16,6 +17,7 @@ public class Sensor {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private int id;
 
     @Column(name = "name")
@@ -24,5 +26,6 @@ public class Sensor {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sensor")
+    @JsonIgnore
     List<Measurement> measurementList;
 }

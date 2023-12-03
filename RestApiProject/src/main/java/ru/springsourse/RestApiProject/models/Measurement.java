@@ -17,14 +17,14 @@ public class Measurement {
     private int id;
 
     @Column(name = "temperature")
-    @NotEmpty(message = "Temperature cannot be empty")
+    @NotNull
     @DecimalMin(value = "-100.0", inclusive = true)
     @DecimalMax(value = "100.0", inclusive = true)
     private BigDecimal temperature;
 
     @Column(name = "raining")
-    @NotEmpty(message = "Raining field cannot be empty")
-    private boolean raining;
+    @NotNull
+    private Boolean raining;
 
     @ManyToOne
     @JoinColumn(name = "sensor_id", referencedColumnName = "id")
@@ -32,7 +32,6 @@ public class Measurement {
 
     @Column(name = "measure_time")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotEmpty
     private Date measuretime;
 
 }
