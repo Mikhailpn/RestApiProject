@@ -15,10 +15,8 @@ import java.util.Date;
 @Data
 public class MeasurementDTO {
 
-
-
-    @DecimalMin(value = "-100.0", inclusive = true)
-    @DecimalMax(value = "100.0", inclusive = true)
+    @DecimalMin(value = "-100.0", inclusive = true, message = "Temperature must be > -100")
+    @DecimalMax(value = "100.0", inclusive = true, message = "Temperature must be < 100")
     private BigDecimal temperature;
 
     @NotNull

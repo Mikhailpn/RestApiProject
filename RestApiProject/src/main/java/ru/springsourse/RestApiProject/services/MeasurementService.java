@@ -39,7 +39,5 @@ public class MeasurementService {
     }
 
     @Transactional(readOnly = true)
-    public int countRainy(){
-        return measurementRepository.findByRaining(true).size();
-    }
+    public int countRainy(){return measurementRepository.findByRaining(true).size();}
 }

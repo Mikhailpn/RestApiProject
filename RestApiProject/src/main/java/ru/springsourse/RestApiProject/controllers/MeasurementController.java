@@ -27,7 +27,7 @@ public class MeasurementController {
         if (bindingResult.hasErrors())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     bindingResult.getAllErrors()
-                            .stream().map(x->x.getDefaultMessage()).reduce(";", String::concat));
+                            .stream().map(x->x.getDefaultMessage()).reduce("", (x, y) -> (x + "; " + y)));
 
         measurementService.add(modelMapper.map(measurementDTO, Measurement.class));
 

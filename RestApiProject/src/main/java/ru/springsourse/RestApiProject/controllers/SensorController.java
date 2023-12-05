@@ -28,7 +28,7 @@ public class SensorController {
         if (bindingResult.hasErrors())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bindingResult
                             .getAllErrors().stream()
-                            .map(x->x.getDefaultMessage()).reduce(";", String::concat));
+                            .map(x->x.getDefaultMessage()).reduce("", (x, y) -> (x + "; " + y)));
 
         sensorService.save(modelMapper.map(sensorDTO, Sensor.class));
 
