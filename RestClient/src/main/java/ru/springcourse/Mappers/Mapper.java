@@ -1,4 +1,4 @@
-package Mappers;
+package ru.springcourse.Mappers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 

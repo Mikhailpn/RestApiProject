@@ -1,20 +1,26 @@
-import JsonObjects.Measurement;
-import JsonObjects.Sensor;
-import Mappers.JsonToMeasurementList;
-import Mappers.Mapper;
-import WebUtils.WebClientRequest;
+package ru.springcourse;
+
+import ru.springcourse.JsonObjects.Measurement;
+import ru.springcourse.JsonObjects.Sensor;
+import ru.springcourse.Mappers.Mapper;
+import ru.springcourse.WebUtils.WebClientRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@Component
+@RequiredArgsConstructor
 public class ApiClient {
+
+    private final WebClientRequest webClientRequest;
+
+    private final Mapper mapper;
+
     public String addSensor(Sensor sensor){
         String response;
         try {
-            WebClientRequest webClientRequest = new WebClientRequest();
             response = webClientRequest.makePostRequest("/sensors/registration", sensor);
         }catch (IOException e){
             response = e.getMessage();
@@ -27,7 +33,6 @@ public class ApiClient {
     public String addMeasurement(Measurement measurement){
         String response;
         try {
-            WebClientRequest webClientRequest = new WebClientRequest();
             response = webClientRequest.makePostRequest("/measurements/add", measurement);
         }catch (IOException e){
             response = e.getMessage();
@@ -38,8 +43,6 @@ public class ApiClient {
     }
 
     public List<Measurement> getMeasurements() throws IOException {
-        WebClientRequest webClientRequest = new WebClientRequest();
-        Mapper mapper= new JsonToMeasurementList();
         return (List<Measurement>)mapper.map(webClientRequest.makeGetRequest("/measurements"));
     }
 }

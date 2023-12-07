@@ -1,9 +1,11 @@
-package WebUtils;
+package ru.springcourse.WebUtils;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 
+@Component
 public class WebClientRequest {
     public String makeGetRequest(String uri) throws IOException {
         WebClient client = WebClient.create("http://localhost:8080");
