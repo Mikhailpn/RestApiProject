@@ -89,7 +89,7 @@ public class MeasurementControllerTest {
     }
 
 
-    /*
+
     @Test
     void getAll_ReturnsNotEmptyListOfMeasurements(){
         //given
@@ -100,20 +100,62 @@ public class MeasurementControllerTest {
         sensor.setMeasurementList(measurementList);
 
         List<MeasurementDTO> measurementDTOList = new ArrayList<>();
-        measurementList.forEach(x->measurementDTOList.add(new MeasurementDTO(x.getTemperature(), x.getRaining(), x.getSensor(), x.getMeasuretime())));
 
-        doReturn(measurementList).when(this.measurementService).findAll();
-        doReturn().when(modelMapper).map(m)
+        for (int i = 0; i < measurementList.size(); i++){
+            Measurement m = measurementList.get(i);
+            MeasurementDTO mdto = new MeasurementDTO(m.getTemperature(), m.getRaining(), m.getSensor(), m.getMeasuretime());
+            measurementDTOList.add(mdto);
+            doReturn(mdto).when(modelMapper).map(m, MeasurementDTO.class);
+        }
+
+        doReturn(measurementList).when(measurementService).findAll();
+
 
         //when
-        var resMeasurementDTOList = this.measurementService.findAll();
+        var resMeasurementDTOList = this.measurementController.getAll();
 
         //then
-        assertNotNull(resMeasurementList);
-        assertEquals(resMeasurementList.size(), 2);
-        assertEquals(resMeasurementDTOList, measurementList);
+        verify(measurementService).findAll();
+        assertNotNull(resMeasurementDTOList);
+        assertEquals(measurementList.size(), resMeasurementDTOList.size());
+        assertEquals(measurementDTOList, resMeasurementDTOList);
 
     }
-    */
-     
+
+    @Test
+    void getAll_ReturnsEmptyListOfMeasurements(){
+        //given
+        List<Measurement> measurementList = Collections.EMPTY_LIST;
+        List<MeasurementDTO> measurementDTOList = Collections.EMPTY_LIST;
+
+        doReturn(measurementList).when(measurementService).findAll();
+
+        //when
+        var resMeasurementDTOList = this.measurementController.getAll();
+
+        //then
+        verify(measurementService).findAll();
+        assertNotNull(resMeasurementDTOList);
+        assertEquals(measurementList.size(), resMeasurementDTOList.size());
+        assertEquals(measurementDTOList, resMeasurementDTOList);
+
+    }
+
+    @Test
+    void getRainyCount_ReturnsCountRainy(){
+        //given
+        int countRainy = 5;
+        doReturn(countRainy).when(measurementService).countRainy();
+
+        //when
+        int resCountRainy = this.measurementController.getRainyCount();
+
+        //then
+        assertEquals(countRainy, resCountRainy);
+
+    }
+
+
+
+
 }
