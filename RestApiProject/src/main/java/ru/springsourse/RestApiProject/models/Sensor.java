@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "sensor", schema = "sensor")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Sensor {
     @Id
     @Column(name = "id")
@@ -30,4 +32,5 @@ public class Sensor {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sensor")
     @JsonIgnore
     List<Measurement> measurementList;
+
 }
