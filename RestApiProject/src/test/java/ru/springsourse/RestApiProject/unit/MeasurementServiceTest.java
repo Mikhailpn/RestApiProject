@@ -1,4 +1,4 @@
-package ru.springsourse.RestApiProject;
+package ru.springsourse.RestApiProject.unit;
 
 
 import org.junit.jupiter.api.Test;

@@ -23,7 +23,7 @@ public class MeasurementDTO {
     @DecimalMax(value = "100.0", inclusive = true, message = "Temperature must be < 100")
     private BigDecimal temperature;
 
-    @NotNull
+    @NotNull(message = "Raining must be true or false, not null")
     private Boolean raining;
     @NotNull
     private Sensor sensor;
