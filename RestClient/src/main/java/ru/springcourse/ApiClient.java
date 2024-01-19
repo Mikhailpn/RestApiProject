@@ -1,5 +1,7 @@
 package ru.springcourse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.kafka.core.KafkaTemplate;
 import ru.springcourse.JsonObjects.Measurement;
 import ru.springcourse.JsonObjects.Sensor;
 import ru.springcourse.Mappers.Mapper;
@@ -18,6 +20,10 @@ public class ApiClient {
 
     private final Mapper mapper;
 
+    private final KafkaTemplate kafkaTemplate;
+
+    private final ObjectMapper objectMapper;
+
     public String addSensor(Sensor sensor){
         String response;
         try {
@@ -30,6 +36,8 @@ public class ApiClient {
         return response;
     }
 
+
+
     public String addMeasurement(Measurement measurement){
         String response;
         try {
@@ -41,6 +49,18 @@ public class ApiClient {
         System.out.println(response);
         return response;
     }
+
+    public void addMeasurementKafka(Measurement measurement){
+
+        try {
+            kafkaTemplate.send("topic1", objectMapper.writeValueAsString(measurement));
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+
 
     public List<Measurement> getMeasurements() throws IOException {
         return (List<Measurement>)mapper.map(webClientRequest.makeGetRequest("/measurements"));

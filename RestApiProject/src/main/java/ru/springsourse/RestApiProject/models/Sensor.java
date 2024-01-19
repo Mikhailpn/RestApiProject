@@ -1,6 +1,7 @@
 package ru.springsourse.RestApiProject.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -27,6 +28,7 @@ public class Sensor {
     @Column(name = "name")
     @NotEmpty(message = "Name cannot be empty")
     @Size(min = 3, max = 30, message = "Name must be between 3 and 30 characters")
+    @JsonProperty("name")
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sensor")

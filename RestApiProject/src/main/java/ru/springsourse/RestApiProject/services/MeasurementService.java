@@ -26,7 +26,7 @@ public class MeasurementService {
     public void add(Measurement measurement){
         Optional<Sensor> sensor = sensorRepository.findByName(measurement.getSensor().getName()).stream().findAny();
         if(sensor.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sensor with such name does not exist");
+            throw new RuntimeException("Sensor with such name does not exist");
 
         measurement.setSensor(sensor.get());
         measurement.setMeasuretime(new Date());

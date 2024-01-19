@@ -29,7 +29,11 @@ public class MeasurementController {
                     bindingResult.getAllErrors()
                             .stream().map(x->x.getDefaultMessage()).reduce("", (x, y) -> (x + "; " + y)));
 
-        measurementService.add(modelMapper.map(measurementDTO, Measurement.class));
+        try {
+            measurementService.add(modelMapper.map(measurementDTO, Measurement.class));
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
 
         return ResponseEntity.ok(HttpStatus.OK);
     }

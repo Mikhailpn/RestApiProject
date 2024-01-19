@@ -17,4 +17,9 @@ public class JsonToMeasurementList implements Mapper<String, List<Measurement>>{
         TypeReference<List<Measurement>> listType = new TypeReference<List<Measurement>>() {};
         return objectMapper.readValue(input, listType);
     }
+
+    public void test(){
+        System.out.println("lalallal");
+    }
+
 }

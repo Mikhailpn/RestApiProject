@@ -8,7 +8,9 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import ru.springsourse.RestApiProject.models.Sensor;
 import ru.springsourse.RestApiProject.repositories.SensorRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -55,6 +57,7 @@ public class SensorTest extends ContainerTest {
         sensor.setName("Sensor 1");
         sensor.setMeasurementList(Collections.emptyList());
         sensorRepository.save(sensor);
+        List<Integer> list = new LinkedList<>();
 
 
 

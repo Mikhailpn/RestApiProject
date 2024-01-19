@@ -29,12 +29,12 @@ public class Main {
             Sensor sensor = sensorGenerator.generate();
             apiClient.addSensor(sensor);
 
-            for (int i =0; i< 100; i++) {
+            for (int i =0; i< 10; i++) {
                 Measurement measurement = measurementGenerator.generate(sensor);
-                apiClient.addMeasurement(measurement);
+                apiClient.addMeasurementKafka(measurement);
             }
 
-            List<Measurement> measurementList = apiClient.getMeasurements();
+            /*List<Measurement> measurementList = apiClient.getMeasurements();
 
             measurementList.sort(Comparator.comparing(Measurement::getMeasuretime));
 
@@ -47,7 +47,7 @@ public class Main {
 
             // Show it
             new SwingWrapper(chart).displayChart();
-
+        */
 
         }catch (Exception e){
             System.out.println(e.getMessage());
